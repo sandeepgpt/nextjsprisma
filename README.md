@@ -66,8 +66,30 @@ npx prisma migrate dev --name init
 npx prisma db push (it push the Model into the database)
 
 npx prisma studio  (see the database )
-
-
+--------------------------------------
+ where: {
+    title: {
+      contains: "First"   //gt: "5" // endsWith: "Post" // 
+    }
+  }
+---
+const post = await prisma.post.findUnique({
+  where: {
+   title: {
+    endsWith: "Post"
+   }
+  },
+  orderBy: {
+    createdAt: "desc"
+  },
+  select: {
+    id: true,
+    title: true,
+    slug: true,
+  },
+  take: 10,         //pagination // its take only one row // search pagination in prisma  
+  skip: 10,
+})
 
 
 

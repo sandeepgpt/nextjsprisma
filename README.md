@@ -92,6 +92,41 @@ const post = await prisma.post.findUnique({
 })
 
 
+prisma.schema 
+author User @relation(fields: [authorId], references: [id])
+  authorId String
+
+  post Post[]
+
+prisma >seed.ts (https://www.prisma.io/docs/orm/prisma-migrate/workflows/seeding)
+  mode_module>.prisma> index.d.ts == 2949 PostCreateInput
+
+
+package.json (add) =>
+
+"prisma": {
+  "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+},
+
+install-> npm i ts-node -D
+          npx prisma db seed
+* see prisma cache 
+
+vercel deploying :
+1) storage : postgres create 
+2) goto  prisma copy and pest in prisma schema 
+3)  goto => .env.local & copy Snippet(prisma) & pest in .env (local file)file   
+npx prisma db push
+npx prisma migrate dev
+4) package.json
+"scripts": {
+  "postinstall": "prisma generate && prisma migrate deploy"
+}
+
+now add into git hub
+vercel goto project and give link of github of your project goto storage and connect with postgres 
+
+
 
 
 
